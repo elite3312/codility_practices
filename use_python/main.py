@@ -41,7 +41,7 @@ each element of array A is an integer within the range [−10,000..10,000].'''
 
 
 
-def solution(A:list):#o(n**2)
+def solution1(A:list):#o(n**2)
     n=len(A)
     prefix_sum=[0]*n
     prefix_sum[0]=A[0]
@@ -64,6 +64,9 @@ def solution(A:list):#o(n**2)
                 min=avg_sum
                 min_start_index=i
     return min_start_index
+def solution(A:list):
+    
+    pass
 if __name__ == "__main__":
     A=[4,2,2,5,1,5,8]
     print(solution(A))
