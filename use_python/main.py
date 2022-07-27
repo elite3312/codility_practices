@@ -64,11 +64,30 @@ def solution1(A:list):#o(n**2)
                 min=avg_sum
                 min_start_index=i
     return min_start_index
+
 def solution(A:list):
-    
-    pass
+    n=len(A)
+    min=100000*10000
+    ans=-1
+    for i in range(n):
+        slice_size_2=None
+        if i+2<n:
+            slice_size_2=A[i:i+2]
+        slice_size_3=None
+        if i+3<n:
+            slice_size_3=A[i:i+3]
+        avg_slice_2=sum(slice_size_2)/2
+        avg_slice_3=sum(slice_size_3)/3
+        if(min>avg_slice_2):
+            min=avg_slice_2
+            ans=i
+        if(min>avg_slice_3):
+            min=avg_slice_3
+            ans=i
+    return ans
+
 if __name__ == "__main__":
     A=[4,2,2,5,1,5,8]
-    print(solution(A))
-    #A=[4,-2,2,-5,-1,5,8]
-    #print(solution(A))
+    print(solution(A))#1
+    A=[-3, -5, -8, -4, -10]
+    print(solution(A))#2
