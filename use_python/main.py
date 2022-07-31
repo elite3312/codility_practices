@@ -71,19 +71,24 @@ def solution(A:list):
     ans=-1
     for i in range(n):
         slice_size_2=None
-        if i+2<n:
+        avg_slice_2=None
+        if i+1<n:
             slice_size_2=A[i:i+2]
+            avg_slice_2=sum(slice_size_2)/2
         slice_size_3=None
-        if i+3<n:
+        avg_slice_3=None
+        if i+2<n:
             slice_size_3=A[i:i+3]
-        avg_slice_2=sum(slice_size_2)/2
-        avg_slice_3=sum(slice_size_3)/3
-        if(min>avg_slice_2):
-            min=avg_slice_2
-            ans=i
-        if(min>avg_slice_3):
-            min=avg_slice_3
-            ans=i
+            avg_slice_3=sum(slice_size_3)/3
+        
+        if(avg_slice_2 is not None):
+            if (min>avg_slice_2):
+                min=avg_slice_2
+                ans=i
+        if( avg_slice_3 is not None):
+            if (min>avg_slice_3 ):
+                min=avg_slice_3
+                ans=i
     return ans
 
 if __name__ == "__main__":
