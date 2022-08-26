@@ -39,36 +39,31 @@ the elements of A are all distinct.'''
 
 def solution(A:list, B:list):
   N=len(A)
-  fish_sizes=A#1~N
-  fish_direction=B#0 or 1
-  fish_alive_status=[True]*N
-  fish_down_stream=[]
+  fish_down_stack=[]#stack
+  fish_survivors=N
   for i in range(N):
-    if fish_direction[i]==1:
-      fish_down_stream.append(i)
-  while True:
-    body_count=0
-    for i in range(len(fish_down_stream)):
-      if fish_alive_status[i] and fish_down_stream[i]+1<N:
-        for j in range(fish_down_stream[i]+1,fish_down_stream[i+1]):
-          if fish_direction[j]==0 and fish_alive_status[j] and fish_down_stream[i]>fish_sizes[j] :
-            fish_alive_status[j]=False
-            body_count+=1
-          elif fish_direction[j]==0 and fish_alive_status[j] and fish_down_stream[i]<fish_sizes[j] :
-            fish_alive_status[fish_down_stream[i]]=False
-            body_count+=1
-            break
-    #check if system has reached equilibrium
-    if body_count==0:break
-  survivor_count=0
-  for f in fish_alive_status:
-    if f:survivor_count+=1
-  return survivor_count
+    if(B[i]==1):
+      fish_down_stack.append(i)
+    else:#fish i is going upstream
+      if len(fish_down_stack)>0:
+        fish_at_stack_top=fish_down_stack[-1]
+        while A[fish_at_stack_top]<A[i] :
+          
+          fish_down_stack.pop(-1)
+          fish_survivors-=1
+          if(len(fish_down_stack)>0):
+            fish_at_stack_top=fish_down_stack[-1]
+            
+          else: break
+        if(len(fish_down_stack)>0)and A[fish_at_stack_top]>A[i]:
+          fish_survivors-=1
+  return fish_survivors
 if __name__ == "__main__":
-    '''
+    
     A=[4,3,2,1,5]
     B=[0,1,0,0,0]
     print(solution(A,B))
+    
     A=[4,3,2,1,5]
     B=[0,0,0,0,0]
     print(solution(A,B))
@@ -80,7 +75,7 @@ if __name__ == "__main__":
     print(solution(A,B))
     A=[4,3,2,1,5]
     B=[0,1,1,1,1]
-    print(solution(A,B))'''
+    print(solution(A,B))
     A=[1,3,2,4,5]
     B=[1,1,1,1,0]
     print(solution(A,B))
