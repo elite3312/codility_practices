@@ -1,6 +1,4 @@
 
-from this import d
-
 import numpy
 depth=18
 base_raised=power=constant_base=numpy.sqrt(2)
