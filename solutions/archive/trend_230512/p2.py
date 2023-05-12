@@ -33,20 +33,23 @@ def solution(A:list):
     res=0
     for i in range(len(target)):
         res+=abs(target[i]-requires_move[i])
+        if res>=1000000000:return -1
     return res
 
             
 
 
 if __name__ == "__main__":
+    
+
     A=[2,1,2]
     ans=solution(A)
     expect=1
     print(A,ans,expect)
 
-    A=[1,1,1,1,1,7]
+    A=[5,1,1,1,1,5]
     ans=solution(A)
-    expect=11
+    expect=7
     print(A,ans,expect)
 
     A=[2,2,2,2]
